@@ -3,4 +3,5 @@ module org.genesiscode.practiceeight {
 
     opens org.genesiscode.practiceeight;
     opens org.genesiscode.practiceeight.view;
+    opens org.genesiscode.practiceeight.view.row;
 }
