@@ -103,6 +103,7 @@ public class MainPane {
     }
 
     private void click_btn_start() {
+        dataIntervalTable.setItems(dulceAda.getObservableListInterval());
         MainPaneAssist.show(dataIntervalTable, resultTable);
     }
 
@@ -131,7 +132,7 @@ public class MainPane {
         dataIntervalTable.getColumns().addAll(List.of(
                 column("Probabilidad", "probability", 100),
                 column("Distribución\nAcumulada", "accumulated", 100),
-                column("Rango de #s\naleatorios", "range", 100),
+                column("Rango de #s\naleatorios", "range", 140),
                 column("Demanda", "demand", 80)));
     }
 
