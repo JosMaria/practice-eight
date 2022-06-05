@@ -11,6 +11,7 @@ import org.genesiscode.practiceeight.service.DulceAda;
 import org.genesiscode.practiceeight.service.utils.Util;
 import org.genesiscode.practiceeight.view.row.RowDataInterval;
 import org.genesiscode.practiceeight.view.row.RowRandomNumber;
+import org.genesiscode.practiceeight.view.row.RowResult;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class MainPane {
     private TextField fieldSalePrice, fieldCost, fieldPriceWithDiscount, fieldDecisionVariable, fieldRandomNumbers;
     private TableView<RowRandomNumber> randomNumbersTable;
     private TableView<RowDataInterval> dataIntervalTable;
+    private TableView<RowResult> resultTable;
 
     private MainPane() {
         dulceAda = DulceAda.getInstance();
@@ -49,6 +51,7 @@ public class MainPane {
         fieldPriceWithDiscount = new TextField();
         buildRandomNumbersTable();
         buildDataIntervalTable();
+        buildResultTable();
     }
 
     private void buildRandomNumbersTable() {
@@ -100,7 +103,7 @@ public class MainPane {
     }
 
     private void click_btn_start() {
-        MainPaneAssist.show(dataIntervalTable);
+        MainPaneAssist.show(dataIntervalTable, resultTable);
     }
 
     private HBox buildDataPane(TextField field, String text) {
@@ -130,6 +133,17 @@ public class MainPane {
                 column("Distribución\nAcumulada", "accumulated", 100),
                 column("Rango de #s\naleatorios", "range", 100),
                 column("Demanda", "demand", 80)));
+    }
+
+    private void buildResultTable() {
+        resultTable = new TableView<>();
+        resultTable.maxWidth(400);
+        resultTable.getColumns().addAll(List.of(
+                column("Replica", "replica", 100),
+                column("# Aleatorio", "randomNumber", 100),
+                column("Demanda", "demand", 100),
+                column("Ganancia", "gain", 100)));
+
     }
 
     private <U, T> TableColumn<U, T> column(String titleColumn, String property, double prefSize) {
