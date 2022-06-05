@@ -24,7 +24,7 @@ public class MainPane {
     private static final Font FONT_SUBTITLE = new Font("Monospace Bold", 14);
     private static final Font FONT_TITLE = new Font("Ubuntu Bold", 20);
 
-    private TextField fieldSalePrice, fieldCost, fieldPriceWithDiscount, fieldDecisionVariable, fieldRandomNumbers;
+    private TextField fieldSalePrice, fieldCost, fieldPriceWithDiscount, fieldPurchasedAmount, fieldRandomNumbers;
     private TableView<RowRandomNumber> randomNumbersTable;
     private TableView<RowDataInterval> dataIntervalTable;
     private TableView<RowResult> resultTable;
@@ -44,7 +44,7 @@ public class MainPane {
     }
 
     private void loadControls() {
-        fieldDecisionVariable = new TextField();
+        fieldPurchasedAmount = new TextField();
 
         fieldSalePrice = new TextField();
         fieldCost = new TextField();
@@ -81,7 +81,7 @@ public class MainPane {
     private VBox decisionVariablePane() {
         Label lblSubtitle = new Label("Varible de Decision");
         lblSubtitle.setFont(FONT_SUBTITLE);
-        return new VBox(10, lblSubtitle, buildDataPane(fieldDecisionVariable, "Cantidad Comprada"));
+        return new VBox(10, lblSubtitle, buildDataPane(fieldPurchasedAmount, "Cantidad Comprada"));
     }
 
     private VBox parametersPane() {
@@ -103,7 +103,13 @@ public class MainPane {
     }
 
     private void click_btn_start() {
-        dataIntervalTable.setItems(dulceAda.getObservableListInterval());
+        double salesPrice = Double.parseDouble(fieldSalePrice.getText());
+        double cost = Double.parseDouble(fieldCost.getText());
+        double priceWithDiscount = Double.parseDouble(fieldPriceWithDiscount.getText());
+        double q = Double.parseDouble(fieldPurchasedAmount.getText());
+
+        resultTable.setItems(dulceAda.getObservableListResult(salesPrice, cost, priceWithDiscount, q));
+        dataIntervalTable.setItems(dulceAda.getList());
         MainPaneAssist.show(dataIntervalTable, resultTable);
     }
 
@@ -129,6 +135,7 @@ public class MainPane {
     private void buildDataIntervalTable() {
         dataIntervalTable = new TableView<>();
         dataIntervalTable.maxWidth(380);
+        dataIntervalTable.setMaxHeight(210);
         dataIntervalTable.getColumns().addAll(List.of(
                 column("Probabilidad", "probability", 100),
                 column("Distribución\nAcumulada", "accumulated", 100),
@@ -139,12 +146,12 @@ public class MainPane {
     private void buildResultTable() {
         resultTable = new TableView<>();
         resultTable.maxWidth(400);
+        resultTable.setMaxHeight(300);
         resultTable.getColumns().addAll(List.of(
                 column("Replica", "replica", 100),
                 column("# Aleatorio", "randomNumber", 100),
                 column("Demanda", "demand", 100),
                 column("Ganancia", "gain", 100)));
-
     }
 
     private <U, T> TableColumn<U, T> column(String titleColumn, String property, double prefSize) {
