@@ -1,11 +1,11 @@
 package org.genesiscode.practiceeight;
 
 import javafx.application.Application;
-import org.genesiscode.practiceeight.view.WindowMain;
+import org.genesiscode.practiceeight.view.MainWindow;
 
 public class Main {
 
     public static void main(String[] args) {
-        Application.launch(WindowMain.class, args);
+        Application.launch(MainWindow.class, args);
     }
 }
