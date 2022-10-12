@@ -103,14 +103,18 @@ public class MainPane {
     }
 
     private void click_btn_start() {
-        double salesPrice = Double.parseDouble(fieldSalePrice.getText());
-        double cost = Double.parseDouble(fieldCost.getText());
-        double priceWithDiscount = Double.parseDouble(fieldPriceWithDiscount.getText());
-        double q = Double.parseDouble(fieldPurchasedAmount.getText());
+        try {
+            double salesPrice = Double.parseDouble(fieldSalePrice.getText());
+            double cost = Double.parseDouble(fieldCost.getText());
+            double priceWithDiscount = Double.parseDouble(fieldPriceWithDiscount.getText());
+            double q = Double.parseDouble(fieldPurchasedAmount.getText());
 
-        resultTable.setItems(dulceAda.getObservableListResult(salesPrice, cost, priceWithDiscount, q));
-        dataIntervalTable.setItems(dulceAda.getList());
-        MainPaneAssist.show(dataIntervalTable, resultTable);
+            resultTable.setItems(dulceAda.getObservableListResult(salesPrice, cost, priceWithDiscount, q));
+            dataIntervalTable.setItems(dulceAda.getList());
+            MainPaneAssist.show(dataIntervalTable, resultTable);
+        } catch (Exception e) {
+            System.out.println("Input data incorrect");
+        }
     }
 
     private HBox buildDataPane(TextField field, String text) {
