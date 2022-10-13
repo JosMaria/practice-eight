@@ -76,6 +76,7 @@ public class MainPane {
         List<Double> list = Util.convertToList(fieldRandomNumbers.getText());
         dulceAda.setRandomNumbers(list);
         randomNumbersTable.setItems(dulceAda.getObservableListRandomNumbers());
+        PopUpWindow.show("Information", "Numeros agregados\nexitosamente");
     }
 
     private VBox decisionVariablePane() {
