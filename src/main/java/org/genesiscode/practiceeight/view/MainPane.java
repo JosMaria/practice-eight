@@ -56,7 +56,7 @@ public class MainPane {
 
     private void buildRandomNumbersTable() {
         randomNumbersTable = new TableView<>();
-        randomNumbersTable.setMaxWidth(175);
+        randomNumbersTable.setMaxWidth(190);
         randomNumbersTable.setMaxHeight(300);
         randomNumbersTable.getColumns().addAll(List.of(
                 column("Fila", "rowNumber", 60),
@@ -76,7 +76,6 @@ public class MainPane {
         List<Double> list = Util.convertToList(fieldRandomNumbers.getText());
         dulceAda.setRandomNumbers(list);
         randomNumbersTable.setItems(dulceAda.getObservableListRandomNumbers());
-        PopUpWindow.show("Information", "Numeros agregados\nexitosamente");
     }
 
     private VBox decisionVariablePane() {
@@ -114,7 +113,7 @@ public class MainPane {
             dataIntervalTable.setItems(dulceAda.getList());
             MainPaneAssist.show(dataIntervalTable, resultTable);
         } catch (Exception e) {
-            System.out.println("Input data incorrect");
+            PopUpWindow.show("Input data incorrect", "Los datos pueden que hayan sido\ningresadas en un formato correcto");
         }
     }
 
@@ -129,7 +128,8 @@ public class MainPane {
         Label title = new Label("DULCE  ADA");
         title.setFont(FONT_TITLE);
 
-        VBox rightPane = new VBox(10, buildPaneInputRandomNumbers(), randomNumbersTable);
+        VBox rightPane = new VBox(20, buildPaneInputRandomNumbers(), randomNumbersTable);
+        rightPane.setAlignment(Pos.CENTER);
         VBox leftPane = new VBox(40, decisionVariablePane(), parametersPane());
         leftPane.setAlignment(Pos.TOP_CENTER);
         pane = new VBox(20, title, new HBox(20, leftPane, rightPane));
@@ -139,7 +139,7 @@ public class MainPane {
 
     private void buildDataIntervalTable() {
         dataIntervalTable = new TableView<>();
-        dataIntervalTable.maxWidth(380);
+        dataIntervalTable.minWidth(620);
         dataIntervalTable.setMaxHeight(210);
         dataIntervalTable.getColumns().addAll(List.of(
                 column("Probabilidad", "probability", 100),
@@ -150,7 +150,7 @@ public class MainPane {
 
     private void buildResultTable() {
         resultTable = new TableView<>();
-        resultTable.maxWidth(400);
+        resultTable.minWidth(640);
         resultTable.setMaxHeight(300);
         resultTable.getColumns().addAll(List.of(
                 column("Replica", "replica", 100),

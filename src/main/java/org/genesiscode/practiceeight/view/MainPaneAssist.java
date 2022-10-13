@@ -29,6 +29,7 @@ public class MainPaneAssist {
         rightPane.setAlignment(Pos.CENTER);
         HBox pane = new HBox(30, leftPane, rightPane);
         pane.setPadding(new Insets(30));
+
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.showAndWait();
